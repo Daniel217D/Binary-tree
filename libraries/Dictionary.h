@@ -15,7 +15,7 @@ private:
 
     void add_rec(const string &key, const string &value);
 
-    string toLower(string str);
+    static string toLower(string str);
 
 public:
     Dictionary();
