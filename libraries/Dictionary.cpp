@@ -112,6 +112,7 @@ void Dictionary::remove(string key) {
     if (current) {
         if (prev) {
             prev->next = current->next;
+            current->next = nullptr;
             delete current;
         } else {
             if (current->next) {
