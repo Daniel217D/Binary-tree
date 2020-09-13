@@ -6,10 +6,9 @@
 using std::cout;
 using std::string;
 
-Dictionary::Dictionary() {
-}
+Dictionary::Dictionary() = default;
 
-Dictionary::Dictionary(string _key, string _value) : key(std::move(_key)), value(std::move(_value)), length(1) {
+Dictionary::Dictionary(string _key, string _value) : key(std::move(_key)), value(std::move(_value)) {
 }
 
 Dictionary::~Dictionary() {
@@ -28,11 +27,9 @@ void Dictionary::add(string key, const string &value) {
 
     //Если список пуст
     if (this->isEmpty()) {
-        this->length++;
         this->key = key;
         this->value = value;
     } else {
-        this->length++;
         int compare = this->key.compare(key);
 
         //левее
@@ -51,7 +48,6 @@ void Dictionary::add(string key, const string &value) {
             }
         } else {
             this->value = value;
-            this->length--;
         }
     }
 }
@@ -71,7 +67,6 @@ void Dictionary::add_rec(const string &key, const string &value) {
             this->next->add_rec(key, value);
         } else {
             this->next->value = value;
-            this->length--;
         }
     }
 }
@@ -115,7 +110,6 @@ void Dictionary::remove(string key) {
     }
 
     if (current) {
-        this->length--;
         if (prev) {
             prev->next = current->next;
             delete current;
@@ -133,11 +127,21 @@ void Dictionary::remove(string key) {
 }
 
 bool Dictionary::isEmpty() {
-    return this->length == 0;
+    return this->key.empty() && this->value.empty() && !this->next;
 }
 
 unsigned int Dictionary::count() {
-    return this->length;
+    unsigned int length = 0;
+
+    if(!this->isEmpty()) {
+        auto *current = this;
+        do {
+            length++;
+            current = current->next;
+        } while (current);
+    }
+
+    return length;
 }
 
 void Dictionary::print() {
@@ -154,8 +158,8 @@ void Dictionary::print() {
 }
 
 string *Dictionary::keys(unsigned int &length) {
-    length = this->length;
-    string *keys = new string[length];
+    length = this->count();
+    auto *keys = new string[length];
     auto *current = this;
 
     for (int i = 0; i < length; ++i, current = current->next) {
@@ -166,8 +170,8 @@ string *Dictionary::keys(unsigned int &length) {
 }
 
 string *Dictionary::values(unsigned int &length) {
-    length = this->length;
-    string *values = new string[length];
+    length = this->count();
+    auto *values = new string[length];
     auto *current = this;
 
     for (int i = 0; i < length; ++i, current = current->next) {
