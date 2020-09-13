@@ -13,8 +13,6 @@ private:
 
     Dictionary *next = nullptr;
 
-    unsigned int length = 0;
-
     void add_rec(const string &key, const string &value);
 
     string toLower(string str);
