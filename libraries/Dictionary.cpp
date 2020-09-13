@@ -78,7 +78,7 @@ string Dictionary::get(string key) {
 
     //правее
     if (compare < 0 && this->next) {
-        return this->next->get(key);
+        result = this->next->get(key);
     } else if (compare == 0) {
         result = this->value;
     }
