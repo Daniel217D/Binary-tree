@@ -1,44 +1,50 @@
 #pragma once
 
 #include <iostream>
-#include <utility>
 
 using std::string;
 
-class Dictionary {
+class Node {
 private:
-    string key = "";
+    string key;
 
-    string value = "";
+    string value;
 
-    Dictionary *next = nullptr;
+    Node *next;
 
-    void add_rec(const string &key, const string &value);
-
-    static string toLower(string str);
+    friend class Dictionary;
 
 public:
-    Dictionary();
+    explicit Node(string _key, string _value, Node *_next);
 
-    Dictionary(string _key, string _value);
+    ~Node();
+};
 
+class Dictionary {
+private:
+    Node *node = nullptr;
+
+    void add_to_head(string key, string value);
+
+    static string to_lower(string str);
+public:
     ~Dictionary();
 
-    void add(string key, const string &value);
+    bool is_empty();
+
+    void put(string key, const string& value);
 
     string get(string key);
 
-    void update(string key, const string &value);
+    bool update(string key, string value);
 
-    void remove(string key);
-
-    bool isEmpty();
+    bool remove(string key);
 
     unsigned int count();
-
-    void print();
 
     string *keys(unsigned int &length);
 
     string *values(unsigned int &length);
+
+    void print();
 };
