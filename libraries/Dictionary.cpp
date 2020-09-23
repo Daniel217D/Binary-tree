@@ -19,10 +19,6 @@ Dictionary::~Dictionary() {
     delete node;
 }
 
-void Dictionary::add_to_head(string key, string value) {
-    node = new Node(std::move(key), std::move(value), node);
-}
-
 string Dictionary::to_lower(string str) {
     for (auto &c : str) {
         c = tolower(c);
@@ -38,7 +34,7 @@ void Dictionary::put(string key, const string& value) {
     key = Dictionary::to_lower(key);
 
     if(is_empty() || key.compare(node->key) < 0) {
-        add_to_head(key, value);
+        node = new Node(std::move(key), std::move(value), node);
     } else {
         Node *current = node;
 

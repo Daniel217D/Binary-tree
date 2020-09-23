@@ -24,8 +24,6 @@ class Dictionary {
 private:
     Node *node = nullptr;
 
-    void add_to_head(string key, string value);
-
     static string to_lower(string str);
 public:
     ~Dictionary();
