@@ -6,18 +6,17 @@ using std::cout;
 using std::string;
 
 int main() {
-    auto *d = new Dictionary();
+    auto *d = new Dictionary("Dog", "Собака");
 
-    d->put("Dog", "Собака");
     d->put("Cat", "Кошка");
     d->put("Bed", "Кровать");
-    d->print();
+    cout << d->to_string();
     cout << "\n";
 
     d->put("dog", "Собакен");
     d->put("DOG", "Собачка");
     d->update("cat", "Кот");
-    d->print();
+    cout << d->to_string();
     cout << "\n";
 
     cout << "Dog - " << d->get("Dog") << "\n";
@@ -38,9 +37,10 @@ int main() {
     }
     cout << "\n\n";
 
+    cout << d->to_string();
     cout << "Количество: " << d->count() << "\n\n";
     d->remove("cat");
-    d->print();
+    cout << d->to_string();
     cout << "Количество: " << d->count() << "\n\n";
 
     d->remove("bed");
