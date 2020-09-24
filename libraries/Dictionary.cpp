@@ -1,7 +1,6 @@
 #include"Dictionary.h"
 
 #include<iostream>
-#include <fstream>
 #include <utility>
 
 using std::cout;
@@ -17,6 +16,12 @@ Node::~Node() {
 
 Dictionary::~Dictionary() {
     delete node;
+}
+
+Dictionary::Dictionary() {}
+
+Dictionary::Dictionary(string _key, string _value) {
+    put(_key, _value);
 }
 
 string Dictionary::to_lower(string str) {
@@ -163,11 +168,14 @@ string * Dictionary::values(unsigned int &length) {
     return values;
 }
 
-void Dictionary::print() {
+string Dictionary::to_string() {
     Node *current = node;
+    string str = "";
 
     while(current) {
-        cout << current->key << ": " << current->value << "\n";
+        str += current->key + ": " + current->value + "\n";
         current = current->next;
     }
+
+    return str;
 }

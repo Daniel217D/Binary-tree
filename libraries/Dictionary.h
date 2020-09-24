@@ -3,6 +3,7 @@
 #include <iostream>
 
 using std::string;
+using std::ostream;
 
 class Node {
 private:
@@ -25,12 +26,17 @@ private:
     Node *node = nullptr;
 
     static string to_lower(string str);
+
 public:
+    Dictionary();
+
+    Dictionary(string key, string value);
+
     ~Dictionary();
 
     bool is_empty();
 
-    void put(string key, const string& value);
+    void put(string key, const string &value);
 
     string get(string key);
 
@@ -44,5 +50,5 @@ public:
 
     string *values(unsigned int &length);
 
-    void print();
+    string to_string();
 };
